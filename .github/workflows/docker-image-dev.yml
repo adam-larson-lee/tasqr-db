@@ -1,11 +1,5 @@
 name: Docker Image CI
 
-environment: dev
-
-with:
-  POSTGRES_USER: ${{secrets.POSTGRES_USER}}
-  POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
-
 on:
   push:
     branches: [ main ]
@@ -14,9 +8,15 @@ on:
 
 jobs:
 
+  environment: dev
+
   build:
 
     runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+      POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
 
     steps:
     - uses: actions/checkout@v2
