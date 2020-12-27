@@ -28,10 +28,8 @@ jobs:
           push: true
           tags: adamlarsonlee/tasqr-db:latest
           build-args: |
-            arg1=value1
-            arg2=value2
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
