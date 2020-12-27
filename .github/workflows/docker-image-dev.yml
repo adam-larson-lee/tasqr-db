@@ -6,19 +6,31 @@ on:
   pull_request:
     branches: [ main ]
 
-jobs:
+stages:
+  - test
+  - build
+  - deploy
 
-  environment: dev
+test:
+  stage: test
+  script: echo "running tests..."
 
-  build:
-
-    runs-on: ubuntu-latest
-
-    env:
-      POSTGRES_USER: ${{secrets.POSTGRES_USER}}
-      POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tasqr-db:latest
+build:
+  stage: build
+  script: echo "building..."
+  jobs:
+    environment:
+      name: dev
+    build:
+      runs-on: ubuntu-latest
+      env:
+        POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+        POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+      steps:
+        - uses: actions/checkout@v2
+        - name: Build the Docker image
+          run: docker build . --file Dockerfile --tag tasqr-db:latest
+  
+  deploy:
+    stage: deploy
+    script: echo "deploying..."
