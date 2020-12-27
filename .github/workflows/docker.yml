@@ -11,7 +11,9 @@ stages:
 
 test:
   stage: test
-  script: echo "running tests..."
+  jobs:
+    main:
+      script: echo "running tests..."
 
 build:
   stage: build
@@ -54,4 +56,6 @@ build:
   
 deploy:
   stage: deploy
-  script: echo "deploying..."
+  jobs:
+    main:
+      script: echo "deploying..."
