@@ -31,5 +31,5 @@ jobs:
             POSTGRES_USER=${{ secrets.POSTGRES_USER }}
             POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
       -
-        name: Image digest
+        name: Image Digest
         run: echo ${{ steps.docker_build.outputs.digest }}
